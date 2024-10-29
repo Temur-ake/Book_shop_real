@@ -21,7 +21,7 @@ class BasketState(StatesGroup):
 
 
 def order_msg(user_id, order_num):
-    user_order = database['orders'][str(user_id)][str(order_num)]
+    user_order = database.get('orders', {})[str(user_id)][str(order_num)]
     msg = f'🔢 Buyurtma raqami: <b>{order_num}</b>\n📆 Buyurtma qilingan sana: <b>{user_order["date_time"]}</b>\n🟣 Buyurtma holati: <b>{user_order["order_status"]}</b>\n'
     all_sum = 0
     for i, v in enumerate(user_order['products'].values()):
@@ -56,7 +56,7 @@ async def confirm(callback: CallbackQuery, state: FSMContext):
 
 @order_router.message(F.content_type == ContentType.CONTACT, BasketState.phone_number)
 async def phone_number(message: Message):
-    msg = basket_msg(message.from_user.id,database)
+    msg = basket_msg(message.from_user.id, database)
     msg += f'\nTelefon raqamingiz: {message.contact.phone_number}\n\n<i>Buyurtma berasizmi?</i>'
     ikb = InlineKeyboardBuilder()
     ikb.row(InlineKeyboardButton(text=_("❌ Yo'q"), callback_data='canceled_order'),
@@ -97,7 +97,7 @@ async def confirm_order(callback: CallbackQuery, bot: Bot):
                                  order_num)))
     await bot.send_message(ADMIN_LIST[0], order_msg(callback.from_user.id,
                                                     order_num
-                                                        ) + f"\n\nKlient: +{int(callback.data[13:])} <a href='tg://user?id={callback.from_user.id}'>{callback.from_user.full_name}</a>\n Buyurtmani qabul qilasizmi",
+                                                    ) + f"\n\nKlient: +{int(callback.data[13:])} <a href='tg://user?id={callback.from_user.id}'>{callback.from_user.full_name}</a>\n Buyurtmani qabul qilasizmi",
                            parse_mode=ParseMode.HTML, reply_markup=ikb.as_markup())
     await callback.message.answer(
         _('✅ Hurmatli mijoz! Buyurtmangiz uchun tashakkur.\nBuyurtma raqami: {orders_num}').format(
@@ -109,7 +109,7 @@ async def confirm_order(callback: CallbackQuery, bot: Bot):
 @order_router.callback_query(F.data.startswith('from_admin'))
 async def order_accept_canceled(callback: CallbackQuery, bot: Bot):
     user_order = callback.data.split('-')[1:]
-    orders = database['orders']
+    orders = database.get('orders', {})
     users_orders = orders[user_order[0]]
     if callback.data.startswith('from_admin_order_accept'):
         users_orders[user_order[1]]['order_status'] = '✅ Zakaz qqabul qilingan'
@@ -125,10 +125,11 @@ async def order_accept_canceled(callback: CallbackQuery, bot: Bot):
 
 @order_router.message(F.text == __('📃 Mening buyurtmalarim'))
 async def my_orders(message: Message):
-    if str(message.from_user.id) not in database['orders'] or not database['orders'][str(message.from_user.id)]:
+    if str(message.from_user.id) not in database.get('orders', {}) or not database.get('orders', {})[
+        str(message.from_user.id)]:
         await message.answer(_('🤷‍♂️ Sizda hali buyurtmalar mavjud emas. Yoki bekor qilingan'))
     else:
-        for order in database['orders'][str(message.from_user.id)].keys():
+        for order in database.get('orders', {})[str(message.from_user.id)].keys():
             ikb = InlineKeyboardMarkup(inline_keyboard=[
                 [InlineKeyboardButton(text=_('❌ bekor qilish'), callback_data='from_user_canceled_order' + order)]])
             await message.answer(order_msg(message.from_user.id, order), reply_markup=ikb)
@@ -137,7 +138,7 @@ async def my_orders(message: Message):
 @order_router.callback_query(F.data.startswith('from_user_canceled_order'))
 async def canceled_order(callback: CallbackQuery, bot: Bot):
     await callback.message.delete()
-    orders = database['orders']
+    orders = database.get('orders', {})
     order_num = callback.data.split('from_user_canceled_order')[-1]
     orders[str(callback.from_user.id)].pop(order_num)
     database['orders'] = orders

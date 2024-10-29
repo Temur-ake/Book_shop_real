@@ -99,17 +99,18 @@ async def contact_info(message: Message) -> None:
 async def product_handler(callback: CallbackQuery):
     if callback.data in database.get('categories', {}):
         ikb = InlineKeyboardBuilder()
-        for k, v in database['products'].items():
+        for k, v in database.get('products', {}).items():
             if 'category_id' in v and v['category_id'] == callback.data:
                 ikb.add(InlineKeyboardButton(text=v['name'], callback_data=k))
         if str(callback.from_user.id) in database.get('basket', {}):
-            ikb.add(InlineKeyboardButton(text=f'🛒 Savat ({len(database["basket"][str(callback.from_user.id)])})',
-                                         callback_data='savat'))
+            ikb.add(
+                InlineKeyboardButton(text=f'🛒 Savat ({len(database.get('basket', {})[str(callback.from_user.id)])})',
+                                     callback_data='savat'))
         ikb.add(InlineKeyboardButton(text=_("◀️ orqaga"), callback_data='orqaga'))
         ikb.adjust(2, repeat=True)
         await callback.message.edit_text(str(database['categories'][callback.data]), reply_markup=ikb.as_markup())
     elif callback.data in database.get('products', {}):
-        product = database['products'][callback.data]
+        product = database.get('products', {})[callback.data]
         ikb = make_plus_minus(1, callback.data)
         await callback.message.delete()
         await callback.message.answer_photo(photo=product['image'], caption=product['text'],

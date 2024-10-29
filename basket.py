@@ -14,8 +14,9 @@ from keyboard import show_categories, make_plus_minus, main_keyboard_btn
 basket_router = Router()
 locale.setlocale(locale.LC_ALL, '')
 
+
 def basket_msg(user_id, database):
-    basket_of_user = database['basket'][str(user_id)]
+    basket_of_user = database.get('basket', {})[str(user_id)]
     msg = f'🛒 Savat \n\n'
     all_sum = 0
     for i, v in enumerate(basket_of_user.values()):
@@ -34,8 +35,6 @@ def basket_msg(user_id, database):
     return msg
 
 
-
-
 @basket_router.callback_query(F.data.startswith('categoryga'))
 async def to_category(callback: CallbackQuery):
     await callback.message.delete()
@@ -45,10 +44,10 @@ async def to_category(callback: CallbackQuery):
 
 @basket_router.callback_query(F.data.startswith('savatga'))
 async def to_basket(callback: CallbackQuery):
-    basket_ = database['basket']
+    basket_ = database.get('basket', {})
     user = basket_.get(str(callback.from_user.id))
     product_id = callback.data[7:43]
-    product = database['products'][product_id]
+    product = database.get('products', {})[product_id]
     if user:
         if user.get(product_id):
             user[product_id]['quantity'] += int(callback.data[43:])
@@ -89,7 +88,7 @@ async def change_plus(callback: CallbackQuery):
 
 @basket_router.callback_query(F.data.startswith('savat'))
 async def basket(callback: CallbackQuery):
-    msg = basket_msg(callback.from_user.id,database)
+    msg = basket_msg(callback.from_user.id, database)
     ikb = InlineKeyboardBuilder()
     ikb.row(InlineKeyboardButton(text=_('❌ Savatni tozalash'), callback_data='clear'))
     ikb.row(InlineKeyboardButton(text=_('✅ Buyurtmani tasdiqlash'), callback_data='confirm'))

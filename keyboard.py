@@ -9,17 +9,17 @@ from cons import database
 admin_panel_keyboard = ReplyKeyboardMarkup(
     keyboard=[[KeyboardButton(text='Product qoshish'), KeyboardButton(text='Category qoshish')],
               [KeyboardButton(text='Delete category'), KeyboardButton(text='Delete product')],
-              [KeyboardButton(text='🛒 Mahsulotlar'),KeyboardButton(text='Reklama 🔊') ]
+              [KeyboardButton(text='🛒 Mahsulotlar'), KeyboardButton(text='Reklama 🔊')]
               ],
     resize_keyboard=True)
 
 
 def show_categories(user_id):
     ikb = InlineKeyboardBuilder()
-    for k, v in database['categories'].items():
+    for k, v in database.get('categories', {}).items():
         ikb.add(InlineKeyboardButton(text=str(v), callback_data=k))
     ikb.add(InlineKeyboardButton(text=_('🔍 Qidirish'), switch_inline_query_current_chat=''))
-    if str(user_id) in database['basket']:
+    if str(user_id) in database.get('basket', {}):
         ikb.add(InlineKeyboardButton(text=f'🛒 Savat ({len(database["basket"][str(user_id)])})', callback_data='savat'))
     ikb.adjust(2, repeat=True)
     return ikb
@@ -47,6 +47,6 @@ def main_keyboard_btn(**kwargs):
 
 
 c_lis = [
-        BotCommand(command='start', description='Botni boshlash'),
-        BotCommand(command='help', description='Yordam'),
-    ]
+    BotCommand(command='start', description='Botni boshlash'),
+    BotCommand(command='help', description='Yordam'),
+]
