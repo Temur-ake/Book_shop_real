@@ -70,9 +70,9 @@ async def languages(callback: CallbackQuery, state: FSMContext) -> None:
 @main_router.message(F.text == __('🔵 Biz ijtimoyi tarmoqlarda'))
 async def our_social_network(message: Message) -> None:
     ikb = InlineKeyboardBuilder()
-    ikb.row(InlineKeyboardButton(text='IKAR | Factor Books', url='https://t.me/ikar_factor'))
-    ikb.row(InlineKeyboardButton(text='Factor Books', url='https://t.me/factor_books'))
-    ikb.row(InlineKeyboardButton(text='\"Factor Books\" nashiryoti', url='https://t.me/factorbooks'))
+    ikb.row(InlineKeyboardButton(text='1000 xil Online Bozor', url='https://t.me/@onlinebozor1000xil'))
+    ikb.row(InlineKeyboardButton(text='1000 xil', url='https://m.temur.life/'))
+    ikb.row(InlineKeyboardButton(text='1000 xil Online Bozor Bot', url='https://t.me/@temurs_book_shop_bot'))
     await message.answer(_('Biz ijtimoiy tarmoqlarda'), reply_markup=ikb.as_markup())
 
 

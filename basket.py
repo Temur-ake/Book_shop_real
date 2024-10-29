@@ -78,7 +78,7 @@ async def change_plus(callback: CallbackQuery):
     if callback.data.startswith("change+"):
         quantity += 1
     elif quantity < 2:
-        await callback.answer(_('Eng kamida 1 ta kitob buyurtma qilishingiz mumkin! 😊'), show_alert=True)
+        await callback.answer(_('Eng kamida 1 ta mahsulot buyurtma qilishingiz mumkin! 😊'), show_alert=True)
         return
     else:
         quantity -= 1

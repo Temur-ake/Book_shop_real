@@ -26,7 +26,7 @@ def order_msg(user_id, order_num):
     all_sum = 0
     for i, v in enumerate(user_order['products'].values()):
         summa = int(v['quantity']) * int(v['price'])
-        msg += f'\n{i + 1}. 📕 Kitob nomi: {v["product_name"]} \n{v["quantity"]} x {v["price"]} = {str(summa)} so\'m\n'
+        msg += f'\n{i + 1}. 🛒 Mahsulot nomi: {v["product_name"]} \n{v["quantity"]} x {v["price"]} = {str(summa)} so\'m\n'
         all_sum += summa
     msg += f'\n💸 Umumiy narxi: {all_sum} so\'m'
     return msg
