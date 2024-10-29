@@ -1,0 +1,180 @@
+# English translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2024-10-29 19:07+0500\n"
+"PO-Revision-Date: 2024-10-29 19:01+0500\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.13.1\n"
+
+#: basket.py:42 handlers.py:79 handlers.py:84
+msgid "Kategoriyalardan birini tanlang"
+msgstr "Please select one of the categories"
+
+#: basket.py:82
+msgid "Eng kamida 1 ta kitob buyurtma qilishingiz mumkin! 😊"
+msgstr "You can order at least 1 book! 😊"
+
+#: basket.py:94
+msgid "❌ Savatni tozalash"
+msgstr "❌ Clear the basket"
+
+#: basket.py:95
+msgid "✅ Buyurtmani tasdiqlash"
+msgstr "✅ Confirm the order"
+
+#: basket.py:96 handlers.py:105
+msgid "◀️ orqaga"
+msgstr "◀️ Back"
+
+#: handlers.py:25 handlers.py:63
+msgid "Assalomu alaykum! Tanlang."
+msgstr "Hello! Please choose."
+
+#: handlers.py:29
+msgid ""
+"Assalomu alaykum! \n"
+"Xush kelibsiz!"
+msgstr ""
+"Hello! \n"
+"Welcome!"
+
+#: handlers.py:36
+msgid ""
+"Buyruqlar:\n"
+"/start - Botni ishga tushirish\n"
+"/help - Yordam"
+msgstr ""
+"Commands:\n"
+"/start - Start the bot\n"
+"/help - Help"
+
+#: handlers.py:48
+msgid "Tilni tanlang: "
+msgstr "Select a language: "
+
+#: handlers.py:56
+msgid "Uzbek"
+msgstr "Uzbek"
+
+#: handlers.py:57
+msgid "Ingiliz"
+msgstr "English"
+
+#: handlers.py:58
+msgid "Rus"
+msgstr "Russian"
+
+#: handlers.py:60
+msgid "{lang} tili tanlandi"
+msgstr "{lang} language selected"
+
+#: handlers.py:73
+msgid "Biz ijtimoiy tarmoqlarda"
+msgstr "We are on social networks"
+
+#: handlers.py:90
+msgid ""
+"\n"
+"\n"
+"Telegram: @C_W24\n"
+"📞  +{number}\n"
+"🤖 Bot Kozimov Temur (@C_W24) tomonidan tayorlandi.\n"
+msgstr ""
+"\n"
+"\n"
+"Telegram: @C_W24\n"
+"📞  +{number}\n"
+"🤖 Bot created by Kozimov Temur (@C_W24)."
+
+#: keyboard.py:21
+msgid "🔍 Qidirish"
+msgstr "🔍 Search"
+
+#: keyboard.py:34
+msgid "◀️Orqaga"
+msgstr "◀️ Back"
+
+#: keyboard.py:35
+msgid "🛒 Savatga qo'shish"
+msgstr "🛒 Add to basket"
+
+#: keyboard.py:41
+msgid "🛒 Mahsulotlar"
+msgstr "🛒 Products"
+
+#: keyboard.py:42
+msgid "📃 Mening buyurtmalarim"
+msgstr "📃 My orders"
+
+#: keyboard.py:43
+msgid "🔵 Biz ijtimoyi tarmoqlarda"
+msgstr "🔵 We are on social networks"
+
+#: keyboard.py:44
+msgid "📞 Biz bilan bog'lanish"
+msgstr "📞 Contact us"
+
+#: keyboard.py:45
+msgid "🌐 Tilni almashtirish"
+msgstr "🌐 Change language"
+
+#: order.py:50
+msgid "📞 Telefon raqam"
+msgstr "📞 Phone number"
+
+#: order.py:52
+msgid "Telefon raqamingizni qoldiring (📞 Telefon raqam tugmasini bosing)🔽:"
+msgstr "Please leave your phone number (📞 Click the phone number button)🔽:"
+
+#: order.py:62 order.py:92
+msgid "❌ Yo'q"
+msgstr "❌ No"
+
+#: order.py:63 order.py:95
+msgid "✅ Ha"
+msgstr "✅ Yes"
+
+#: order.py:70
+msgid "❌ Bekor qilindi"
+msgstr "❌ Canceled"
+
+#: order.py:72
+msgid "Asosiy menyu"
+msgstr "Main menu"
+
+#: order.py:103
+msgid ""
+"✅ Hurmatli mijoz! Buyurtmangiz uchun tashakkur.\n"
+"Buyurtma raqami: {orders_num}"
+msgstr ""
+"✅ Dear customer! Thank you for your order.\n"
+"Order number: {orders_num}"
+
+#: order.py:117
+msgid ""
+"<i>🎉 Sizning {order_num} raqamli buyurtmangizni admin qabul qildi.\n"
+" Tez orada siz bilan bog'lanamiz telefoningiz yoniq holatda bo'lsin </i>"
+msgstr ""
+"<i>🎉 Your order number {order_num} has been accepted by the admin.\n"
+" We will contact you soon, please keep your phone on.</i>"
+
+#: order.py:129
+msgid "🤷‍♂️ Sizda hali buyurtmalar mavjud emas. Yoki bekor qilingan"
+msgstr "🤷‍♂️ You have no orders yet. Or they have been canceled."
+
+#: order.py:133
+msgid "❌ bekor qilish"
+msgstr "❌ Cancel"
+
