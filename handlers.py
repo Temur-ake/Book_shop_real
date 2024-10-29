@@ -5,7 +5,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from aiogram.enums import ParseMode
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message, CallbackQuery, InlineKeyboardButton
+from aiogram.types import Message, CallbackQuery, InlineKeyboardButton, WebAppInfo
 from aiogram.utils.i18n import gettext as _
 from aiogram.utils.i18n import lazy_gettext as __
 from filter import IsAdmin
@@ -71,7 +71,7 @@ async def languages(callback: CallbackQuery, state: FSMContext) -> None:
 async def our_social_network(message: Message) -> None:
     ikb = InlineKeyboardBuilder()
     ikb.row(InlineKeyboardButton(text='1000 xil Online Bozor', url='https://t.me/@onlinebozor1000xil'))
-    ikb.row(InlineKeyboardButton(text='1000 xil', url='https://m.temur.life/'))
+    ikb.row(InlineKeyboardButton(text='1000 xil', web_app=WebAppInfo(url='https://m.temur.life/')))
     ikb.row(InlineKeyboardButton(text='1000 xil Online Bozor Bot', url='https://t.me/@temurs_book_shop_bot'))
     await message.answer(_('Biz ijtimoiy tarmoqlarda'), reply_markup=ikb.as_markup())
 
