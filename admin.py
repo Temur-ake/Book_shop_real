@@ -1,4 +1,4 @@
-import os
+from aiogram.methods import SendPhoto, SendMessage
 
 from state import FormState, make_url
 from uuid import uuid4
@@ -146,10 +146,11 @@ async def add_product(callback: CallbackQuery, state: FSMContext, bot: Bot):
     products_ = database['products']
     products_[str(uuid4())] = save_product
     database['products'] = products_
-    await bot.send_photo(chat_id=os.getenv('CHAT_ID'), photo=save_product['image'], caption=save_product['text'])
+
+    await bot.send_photo(chat_id=ADMIN_LIST[0], photo=save_product['image'], caption=save_product['text'])
     await state.clear()
     await callback.message.delete()
-    await callback.message.answer('Saqlandi', reply_markup=kb.admin_panel_keyboard)
+    await callback.message.answer('Mahsulot Saqlandi', reply_markup=kb.admin_panel_keyboard)
 
 
 @admin_router.message(CommandStart(), IsAdmin())
