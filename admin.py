@@ -1,9 +1,7 @@
-from aiogram.methods import SendPhoto, SendMessage
-
 from state import FormState, make_url
 from uuid import uuid4
 
-from aiogram import F, Router, Bot
+from aiogram import F, Router
 from aiogram.enums import ChatType
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
@@ -137,7 +135,7 @@ async def add_product(message: Message, state: FSMContext):
 
 
 @admin_router.callback_query(FormState.product_category)
-async def add_product(callback: CallbackQuery, state: FSMContext, bot: Bot):
+async def add_product(callback: CallbackQuery, state: FSMContext):
     if callback.data not in database['categories']:
         await callback.answer('Categoryda hatolik')
         return
@@ -146,11 +144,9 @@ async def add_product(callback: CallbackQuery, state: FSMContext, bot: Bot):
     products_ = database['products']
     products_[str(uuid4())] = save_product
     database['products'] = products_
-
-    await bot.send_photo(chat_id=ADMIN_LIST[0], photo=save_product['image'], caption=save_product['text'])
     await state.clear()
     await callback.message.delete()
-    await callback.message.answer('Mahsulot Saqlandi', reply_markup=kb.admin_panel_keyboard)
+    await callback.message.answer('Saqlandi', reply_markup=kb.admin_panel_keyboard)
 
 
 @admin_router.message(CommandStart(), IsAdmin())
